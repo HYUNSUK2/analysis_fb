@@ -36,9 +36,8 @@ comments.limit(0).summary(true)',
         posts = json_result.get('data')
         paging = json_result.get('paging')
 
+        yield posts
+
         url = paging.get('next')
         if url is None:
             break
-
-        yield posts
-
