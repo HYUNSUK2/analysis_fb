@@ -1,7 +1,10 @@
 from datetime import datetime, timedelta
 from .api import api
+import json
 
 RESULT_DIRECTORY = '__results__/crawling'
+
+
 def preprocess_post(post):
     # 공유수
     if 'shares' not in post:
@@ -41,5 +44,8 @@ def crawling(pagename, since, until):
     # save results to file
     filename = '%s/fb_%s_%s_%s.json' % (RESULT_DIRECTORY, pagename, since, until)
     with open(filename, 'w', encoding='utf-8') as outfile:
-        pass
+        json_string = json.dumps(results, indent=4, sort_keys=True, ensure_ascii=False)
+        outfile.write(json_string)
+
+    return filename
 
