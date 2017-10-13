@@ -30,14 +30,15 @@ comments.limit(0).summary(true)',
         limit=LIMIT_REQUEST,
         access_token=ACCESS_TOKEN)
 
-    while True:
+    isnext = True
+    while isnext is True:
         json_result = json_request(url=url)
 
-        posts = json_result.get('data')
-        paging = json_result.get('paging')
+        paging = None if json_result is None else json_result.get('paging')
+        posts = None if json_result is None else json_result.get('data')
+
+        url = None if paging is None else paging.get('next')
+        isnext = url is not None
 
         yield posts
 
-        url = paging.get('next')
-        if url is None:
-            break
