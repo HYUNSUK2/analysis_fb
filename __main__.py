@@ -1,5 +1,6 @@
 import collection
 import analyze
+import visualize
 
 pagename = "jtbcnews"
 since = '2017-10-01'
@@ -7,8 +8,8 @@ until = '2017-10-01'
 
 if __name__ == '__main__':
     items = [
-        {'pagename': 'jtbcnews', 'since': '2017-01-01', 'until': '2017-10-13'},
-        {'pagename': 'chosun', 'since': '2017-01-01', 'until': '2017-10-13'}
+        {'pagename': 'jtbcnews', 'since': '2017-01-01', 'until': '2017-10-16'},
+        {'pagename': 'chosun', 'since': '2017-01-01', 'until': '2017-10-16'}
     ]
 
     # collection
@@ -25,4 +26,12 @@ if __name__ == '__main__':
     for item in items:
         count = item['count']
         count_t50 = dict(count.most_common(50))
-        print(count_t50)
+        filename = '%s_%s_%s.png' % (item['pagename'], item['since'], item['until'])
+        visualize.graph_bar(
+            values=list(count_t50.values()),
+            ticks=list(count_t50.keys()),
+            showgrid=True,
+            filename=filename,
+            showgraph=False
+        )
+

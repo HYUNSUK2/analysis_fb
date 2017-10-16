@@ -1,7 +1,7 @@
 import numpy as np
-import numpy.random as rnd
+from numpy.random import randn
 import matplotlib.pyplot as plt
-
+from matplotlib import font_manager, rc
 
 def ex1():
     # plt.plot([1, 2, 3, 4], [10, 20, 30, 40])
@@ -24,13 +24,13 @@ def ex3():
     fig = plt.figure()
 
     sp1 = fig.add_subplot(2, 2, 1)
-    sp1.plot(rnd.random(50).cumsum(), 'k--')
+    sp1.plot(randn(50).cumsum(), 'k--')
 
     sp2 = fig.add_subplot(2, 2, 2)
-    sp2.hist(rnd.random(100), bins=20, color='k', alpha=0.3)
+    sp2.hist(randn(1000), bins=20, color='k', alpha=0.3)
 
     sp3 = fig.add_subplot(2, 2, 3)
-    sp3.scatter(np.arange(100), np.arange(100) + 3 * rnd.random(100))
+    sp3.scatter(np.arange(100), np.arange(100) + 3 * randn(100))
 
     plt.show()
 
@@ -38,9 +38,9 @@ def ex3():
 def ex4():
     fig, subplots = plt.subplots(2, 2)
 
-    subplots[0, 0].plot(rnd.random(50).cumsum(), 'k--')
-    subplots[0, 1].hist(rnd.random(100), bins=20, color='k', alpha=0.3)
-    subplots[1, 0].scatter(np.arange(100), np.arange(100) + 3 * rnd.random(100))
+    subplots[0, 0].plot(randn(50).cumsum(), 'k--')
+    subplots[0, 1].hist(randn(100), bins=20, color='k', alpha=0.3)
+    subplots[1, 0].scatter(np.arange(100), np.arange(100) + 3 * randn(100))
 
     plt.show()
 
@@ -52,9 +52,118 @@ def ex5():
     plt.show()
 
 
+def ex6():
+    fig, subplots = plt.subplots(2, 2, sharex=True, sharey=True)
+    for i in range(2):
+        for j in range(2):
+            subplots[i, j].hist(randn(100), bins=20, color='k', alpha=0.3)
+
+    plt.subplots_adjust(wspace=0, hspace=0)
+    plt.show()
+
+
+def ex7():
+    fig, subplots = plt.subplots(1, 1)
+    subplots.plot([1, 2, 3, 4], [10, 20, 30, 40], 'ko-')
+    plt.show()
+
+
+def ex8():
+    fig, subplots = plt.subplots(1, 1)
+    subplots.plot(
+        [1, 2, 3, 4],
+        [10, 20, 30, 40],
+        color='#000000',
+        marker='o',
+        linestyle='solid')
+    plt.show()
+
+
+def ex9():
+    fig, subplots = plt.subplots(1, 1)
+    # subplots.plot(randn(50).cumsum(), 'ko--')
+    subplots.plot(randn(50).cumsum(), color='#34ff22', marker='o', linestyle="-.")
+    plt.show()
+
+
+def ex10():
+    data = randn(50).cumsum()
+
+    fig, subplots = plt.subplots(1, 1)
+    subplots.plot(data, color='#aaaaaa', linestyle='--', label='Default')
+    subplots.plot(data, 'k-', drawstyle='steps-post', label='steps-mid')
+
+    plt.legend(loc='best')
+    plt.show()
+
+
+def ex11():
+    fig, subplots = plt.subplots(1, 1)
+    subplots.plot(randn(100).cumsum())
+
+    # subplots.set_xticks([0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100])
+    subplots.set_xticklabels(
+        ['pt0', 'pt1', 'pt2', 'pt3', 'pt4', 'pt5', 'pt6', 'pt7', 'pt8', 'pt9', 'pt10'],
+        rotation=30,
+        fontsize='small')
+    subplots.set_xlabel('Positions')
+    subplots.set_title('My First Matplotlib Plot')
+
+    plt.show()
+
+
+def ex12():
+    fig, subplots = plt.subplots(1, 1)
+    subplots.plot(randn(100).cumsum(), 'k', label='one')
+    subplots.plot(randn(100).cumsum(), 'k--', label='two')
+    subplots.plot(randn(100).cumsum(), 'k.', label='three')
+
+    plt.legend(loc='best')
+    plt.show()
+
+
+def ex13():
+    # font_options = {'family': 'Malgun Gothic'}
+    # plt.rc('font', **font_options)
+    # plt.rc('font', family='Malgun Gothic')
+    # plt.rc('axes', unicode_minus=False)
+
+    fig, subplots = plt.subplots(1, 1)
+    subplots.plot(randn(100).cumsum())
+
+    # subplots.set_xticks([0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100])
+    subplots.set_xticklabels(
+        ['pt0', 'pt1', 'pt2', 'pt3', 'pt4', 'pt5', 'pt6', 'pt7', 'pt8', 'pt9', 'pt10'],
+        rotation=30,
+        fontsize='small')
+    subplots.set_xlabel('포인트')
+    subplots.set_title('예제13 한글처리')
+
+    plt.savefig('ex13-plot.png', dpi=400, bbox_inches='tight')
+    # plt.savefig('ex13-plot.jpg', dpi=400, bbox_inches='tight')
+    plt.savefig('ex13-plot.pdf', dpi=400, bbox_inches='tight')
+    plt.savefig('ex13-plot.svg', dpi=400, bbox_inches='tight')
+
+    plt.show()
+
+
+def ex14():
+    fontfile = 'c:/windows/fonts/malgun.ttf'
+    fontname = font_manager.FontProperties(fname=fontfile).get_name()
+    print(fontname)
+
+
 if __name__ == '__main__':
+    # ex14()
+    ex13()
+    # ex12()
+    # ex11()
+    # ex10()
     # ex1()
     # ex2()
     # ex3()
     # ex4()
-    ex5()
+    # ex6()
+    # ex7()
+    # ex8()
+    # ex9()
