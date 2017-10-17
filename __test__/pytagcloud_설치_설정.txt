@@ -1,0 +1,41 @@
+﻿1. pytagcloud 설치
+
+   pytagcloud(0.35)
+   pip install pytagcloud
+
+   pygame(1.9.3)
+   pip install pygame
+
+   simplejson(3.11.1)
+   pip install simplejson
+
+2. 한글 처리
+  
+   라이브러리 설치 위치
+   파이썬 설치 경로\Lib\site-packages
+
+   파이썬 설치 경로\Lib\site-packages\pytagcloud\fonts
+
+   한글 폰트(malgun.ttf)를 복사
+   fonts.json(pytagcloud 폰트 설정파일) 수정
+
+   {
+	"name": "Malgun",
+	"ttf": "malgun.ttf",
+	"web": "http://fonts.googleapis.com/css?family=Malgun"
+   }
+   항목을 추가한다.
+		
+
+
+
+
+
+
+
+
+
+   
+
+
+		   
